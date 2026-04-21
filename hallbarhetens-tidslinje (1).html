@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hållbarhetens historia – Carl Rugfelt</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f7f6f2;
+    --fg: #1a1a18;
+    --fg-muted: #6b6b65;
+    --accent: #2d6a4f;
+    --accent-light: #e8f5ee;
+    --border: rgba(26,26,24,0.1);
+    --era-moral: #9FE1CB;
+    --era-frivillig: #85B7EB;
+    --era-finansiell: #EF9F27;
+    --era-obligatorisk: #E24B4A;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--fg);
+    font-size: 16px;
+    line-height: 1.6;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.2rem 2.5rem;
+    background: rgba(247,246,242,0.92);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-name {
+    font-family: 'DM Serif Display', serif;
+    font-size: 18px; letter-spacing: -0.02em;
+  }
+  .nav-links { display: flex; gap: 2rem; }
+  .nav-links a {
+    text-decoration: none; font-size: 13px; font-weight: 400;
+    color: var(--fg-muted); letter-spacing: 0.02em;
+    transition: color .2s;
+  }
+  .nav-links a:hover { color: var(--fg); }
+  .nav-back {
+    text-decoration: none; font-size: 13px; color: var(--accent);
+    display: flex; align-items: center; gap: 6px;
+  }
+  .nav-back:hover { opacity: .75; }
+
+  /* HERO */
+  .hero {
+    padding: 9rem 2.5rem 4rem;
+    max-width: 820px; margin: 0 auto;
+    border-bottom: 1px solid var(--border);
+  }
+  .hero-tag {
+    display: inline-block;
+    font-size: 11px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase;
+    color: var(--accent); background: var(--accent-light);
+    padding: 4px 10px; border-radius: 20px; margin-bottom: 1.5rem;
+  }
+  .hero h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2.2rem, 5vw, 3.5rem);
+    line-height: 1.1; letter-spacing: -0.03em;
+    margin-bottom: 1.2rem;
+  }
+  .hero h1 em { font-style: italic; color: var(--accent); }
+  .hero-sub {
+    font-size: 17px; color: var(--fg-muted); max-width: 560px; line-height: 1.6;
+  }
+  .hero-meta {
+    margin-top: 2rem;
+    display: flex; gap: 2rem; flex-wrap: wrap;
+    font-size: 12px; color: var(--fg-muted); letter-spacing: .04em;
+  }
+
+  /* CONTENT */
+  .content {
+    max-width: 820px; margin: 0 auto;
+    padding: 3rem 2.5rem 6rem;
+  }
+
+  /* LEGEND */
+  .legend {
+    display: flex; flex-wrap: wrap; gap: 16px;
+    margin-bottom: 3rem;
+    padding: 1.2rem 1.5rem;
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+  }
+  .legend-item {
+    display: flex; align-items: center; gap: 8px;
+    font-size: 12px; color: var(--fg-muted);
+  }
+  .legend-dot {
+    width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0;
+  }
+
+  /* TIMELINE */
+  .timeline { position: relative; }
+  .timeline::before {
+    content: '';
+    position: absolute; left: 80px; top: 0; bottom: 0;
+    width: 1px; background: var(--border);
+  }
+
+  .era { margin-bottom: 3.5rem; }
+
+  .era-header {
+    display: flex; align-items: center; gap: 16px;
+    margin-bottom: 1.5rem; position: relative;
+  }
+  .era-years {
+    font-size: 11px; font-weight: 500; letter-spacing: .06em;
+    text-transform: uppercase; color: var(--fg-muted);
+    width: 64px; text-align: right; flex-shrink: 0;
+  }
+  .era-dot {
+    width: 14px; height: 14px; border-radius: 50%;
+    border: 2px solid white;
+    box-shadow: 0 0 0 1px currentColor;
+    flex-shrink: 0; z-index: 2; margin-left: -6px;
+  }
+  .era-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 18px; letter-spacing: -0.02em;
+  }
+
+  .events { padding-left: calc(80px + 24px); }
+
+  .event {
+    display: grid; grid-template-columns: 52px 1fr;
+    gap: 16px; margin-bottom: 12px;
+    padding: 14px 16px;
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: border-color .15s, transform .15s;
+    text-decoration: none; color: inherit;
+  }
+  .event:hover {
+    border-color: var(--accent);
+    transform: translateX(3px);
+  }
+
+  .event-year {
+    font-size: 12px; font-weight: 500;
+    color: white;
+    padding: 3px 6px; border-radius: 4px;
+    text-align: center; align-self: start; margin-top: 2px;
+    line-height: 1.4;
+  }
+  .era-moral-bg    { background: #0F6E56; }
+  .era-frivillig-bg { background: #185FA5; }
+  .era-finansiell-bg { background: #854F0B; }
+  .era-obligatorisk-bg { background: #A32D2D; }
+
+  .event-body {}
+  .event-title { font-size: 14px; font-weight: 500; margin-bottom: 3px; }
+  .event-desc  { font-size: 13px; color: var(--fg-muted); line-height: 1.5; }
+
+  /* TWO FORCES */
+  .forces-section { margin-top: 4rem; }
+  .forces-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 22px; margin-bottom: 1.5rem; letter-spacing: -0.02em;
+  }
+  .forces-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+  }
+  .force-card {
+    padding: 1.5rem; background: white;
+    border: 1px solid var(--border); border-radius: 8px;
+  }
+  .force-card.values  { border-top: 3px solid var(--era-moral); }
+  .force-card.struct  { border-top: 3px solid var(--era-obligatorisk); }
+  .force-card-title   { font-size: 14px; font-weight: 500; margin-bottom: 12px; }
+  .force-list { list-style: none; }
+  .force-list li {
+    font-size: 13px; color: var(--fg-muted);
+    padding: 4px 0; border-bottom: 1px solid var(--border);
+  }
+  .force-list li:last-child { border-bottom: none; color: var(--fg-muted); font-style: italic; }
+
+  /* BLOCKQUOTE */
+  .pullquote {
+    margin: 3rem 0;
+    padding: 1.5rem 2rem;
+    border-left: 3px solid var(--accent);
+    background: var(--accent-light);
+    border-radius: 0 8px 8px 0;
+  }
+  .pullquote p {
+    font-family: 'DM Serif Display', serif;
+    font-size: 17px; line-height: 1.5; color: var(--accent);
+    font-style: italic;
+  }
+
+  /* FOOTER */
+  footer {
+    text-align: center; padding: 2rem;
+    font-size: 12px; color: var(--fg-muted);
+    border-top: 1px solid var(--border);
+  }
+  footer a { color: var(--accent); text-decoration: none; }
+
+  @media (max-width: 600px) {
+    nav { padding: 1rem 1.2rem; }
+    .nav-links { display: none; }
+    .hero { padding: 6rem 1.2rem 2.5rem; }
+    .content { padding: 2rem 1.2rem 4rem; }
+    .timeline::before { left: 60px; }
+    .era-years { width: 48px; font-size: 10px; }
+    .events { padding-left: calc(60px + 18px); }
+    .forces-grid { grid-template-columns: 1fr; }
+    .event { grid-template-columns: 44px 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <span class="nav-name">Carl Rugfelt</span>
+  <div class="nav-links">
+    <a href="https://carlrugfelt.github.io/#om">Om mig</a>
+    <a href="https://carlrugfelt.github.io/#portfolio">Portfolio</a>
+    <a href="https://carlrugfelt.github.io/#erfarenhet">Erfarenhet</a>
+    <a href="https://carlrugfelt.github.io/#kontakt">Kontakt</a>
+  </div>
+  <a class="nav-back" href="https://carlrugfelt.github.io/#portfolio">← Portfolio</a>
+</nav>
+
+<div class="hero">
+  <span class="hero-tag">Analys · 2025</span>
+  <h1>Från samvete<br>till <em>struktur</em></h1>
+  <p class="hero-sub">Hur finansiell och icke-finansiell rapportering formats av sin tid, och varför hållbarhet slutade vara en fråga om värderingar.</p>
+  <div class="hero-meta">
+    <span>Carl Rugfelt</span>
+    <span>Hållbarhetsstrategi</span>
+    <span>CSRD · GHG · ESG</span>
+  </div>
+</div>
+
+<div class="content">
+
+  <div class="legend">
+    <div class="legend-item"><span class="legend-dot" style="background:#0F6E56"></span>Moralisk era (1900–1970)</div>
+    <div class="legend-item"><span class="legend-dot" style="background:#185FA5"></span>Frivillighetens era (1970–2010)</div>
+    <div class="legend-item"><span class="legend-dot" style="background:#854F0B"></span>Finansiellt uppvaknande (2010–2019)</div>
+    <div class="legend-item"><span class="legend-dot" style="background:#A32D2D"></span>Obligatorisk struktur (2020–)</div>
+  </div>
+
+  <div class="timeline">
+
+    <!-- ERA 1 -->
+    <div class="era">
+      <div class="era-header">
+        <span class="era-years">1900–<br>1970</span>
+        <span class="era-dot" style="color: #0F6E56"></span>
+        <span class="era-title">Moralisk era</span>
+      </div>
+      <div class="events">
+        <div class="event">
+          <span class="event-year era-moral-bg">1929<br>–34</span>
+          <div class="event-body">
+            <div class="event-title">Securities Acts, USA</div>
+            <div class="event-desc">Standardiserad finansiell rapportering krävs av börsbolag. Externaliserade kostnader – miljö, hälsa – osynliga i systemet per definition.</div>
+          </div>
+        </div>
+        <div class="event">
+          <span class="event-year era-moral-bg">1936</span>
+          <div class="event-body">
+            <div class="event-title">Keynesiansk ekonomi formaliseras</div>
+            <div class="event-desc">BNP-tillväxt och sysselsättning som politiska mål befäster att "framsteg" mäts i finansiella termer.</div>
+          </div>
+        </div>
+        <div class="event">
+          <span class="event-year era-moral-bg">1962</span>
+          <div class="event-body">
+            <div class="event-title">Silent Spring – Rachel Carson</div>
+            <div class="event-desc">Den moderna miljörörelsens startskott. För första gången når miljöfrågor en bred allmänhet. Fortfarande en värderingsfråga, inte en affärsfråga.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ERA 2 -->
+    <div class="era">
+      <div class="era-header">
+        <span class="era-years">1970–<br>2010</span>
+        <span class="era-dot" style="color: #185FA5"></span>
+        <span class="era-title">Frivillighetens era</span>
+      </div>
+      <div class="events">
+        <div class="event">
+          <span class="event-year era-frivillig-bg">1970</span>
+          <div class="event-body">
+            <div class="event-title">EPA grundas, USA</div>
+            <div class="event-desc">Första statliga myndighet med mandat att reglera industrins miljöpåverkan. Signalen: frivillighet räcker inte.</div>
+          </div>
+        </div>
+        <div class="event">
+          <span class="event-year era-frivillig-bg">1972</span>
+          <div class="event-body">
+            <div class="event-title">FN:s miljökonferens, Stockholm</div>
+            <div class="event-desc">Första internationella mötet om miljö som global fråga. Skapar ett globalt ramverk för diskussion – inga bindande regler.</div>
+          </div>
+        </div>
+        <div class="event">
+          <span class="event-year era-frivillig-bg">1987</span>
+          <div class="event-body">
+            <div class="event-title">Brundtlandrapporten</div>
+            <div class="event-desc">"Hållbar utveckling" definieras för första gången i en FN-rapport. Skapar ett gemensamt språk, men ännu inga bindande krav på näringsliv.</div>
+          </div>
+        </div>
+        <div class="event">
+          <span class="event-year era-frivillig-bg">1989</span>
+          <div class="event-body">
+            <div class="event-title">Exxon Valdez</div>
+            <div class="event-desc">Oljekatastrofen visar att miljöincidenter har direkta finansiella konsekvenser. Miljö börjar bli ett riskhanteringsproblem.</div>
+          </div>
+        </div>
+        <div class="event">
+          <span class="event-year era-frivillig-bg">1997</span>
+          <div class="event-body">
+            <div class="event-title">GRI grundas</div>
+            <div class="event-desc">Första seriösa försöket att skapa ett standardiserat ramverk för icke-finansiell rapportering. Frivilligt, men med ett gemensamt språk.</div>
+          </div>
+        </div>
+        <div class="event">
+          <span class="event-year era-frivillig-bg">2000</span>
+          <div class="event-body">
+            <div class="event-title">UN Global Compact</div>
+            <div class="event-desc">Globala frivilliga initiativ multipliceras. Det finansiella systemet mäter fortfarande inte hållbarhet som en riskfaktor i egentlig mening.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ERA 3 -->
+    <div class="era">
+      <div class="era-header">
+        <span class="era-years">2010–<br>2019</span>
+        <span class="era-dot" style="color: #854F0B"></span>
+        <span class="era-title">Finansiellt uppvaknande</span>
+      </div>
+      <div class="events">
+        <div class="event">
+          <span class="event-year era-finansiell-bg">2015</span>
+          <div class="event-body">
+            <div class="event-title">Carney: "Breaking the tragedy of the horizon"</div>
+            <div class="event-desc">Bank of Englands chef argumenterar: klimatrisker är finansiella risker. Inte ett moraliskt argument – ett marknadssviktsargument från en centralbankschef.</div>
+          </div>
+        </div>
+        <div class="event">
+          <span class="event-year era-finansiell-bg">2015</span>
+          <div class="event-body">
+            <div class="event-title">Paris-avtalet</div>
+            <div class="event-desc">Klimat etableras som systemrisk av globala finansinstitutioner. Argumentet är nu ekonomiskt, inte moraliskt.</div>
+          </div>
+        </div>
+        <div class="event">
+          <span class="event-year era-finansiell-bg">2016</span>
+          <div class="event-body">
+            <div class="event-title">TCFD etableras</div>
+            <div class="event-desc">Första ramverk som explicit behandlar klimatrelaterad information som finansiellt relevant – en del av rapporten, inte ett tillägg till den.</div>
+          </div>
+        </div>
+        <div class="event">
+          <span class="event-year era-finansiell-bg">2018</span>
+          <div class="event-body">
+            <div class="event-title">EU Taxonomy – första utkast</div>
+            <div class="event-desc">EU börjar klassificera ekonomiska aktiviteter som hållbara eller inte. En taxonomisk fråga med direkta finansiella konsekvenser.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ERA 4 -->
+    <div class="era">
+      <div class="era-header">
+        <span class="era-years">2020–</span>
+        <span class="era-dot" style="color: #A32D2D"></span>
+        <span class="era-title">Obligatorisk struktur</span>
+      </div>
+      <div class="events">
+        <div class="event">
+          <span class="event-year era-obligatorisk-bg">2019<br>–20</span>
+          <div class="event-body">
+            <div class="event-title">EU:s gröna giv & CSRD</div>
+            <div class="event-desc">Obligatorisk, standardiserad och granskad hållbarhetsrapportering för tiotusentals europeiska bolag. Från frivilligt till lagstadgat.</div>
+          </div>
+        </div>
+        <div class="event">
+          <span class="event-year era-obligatorisk-bg">2023</span>
+          <div class="event-body">
+            <div class="event-title">CBAM träder i kraft</div>
+            <div class="event-desc">Koldioxidtull på import till EU. Hållbarhet prissätts vid gränsen. Konkurrensvillkoren förändras för importintensiva industrier.</div>
+          </div>
+        </div>
+        <div class="event">
+          <span class="event-year era-obligatorisk-bg">2024</span>
+          <div class="event-body">
+            <div class="event-title">ISSB-standarder obligatoriska</div>
+            <div class="event-desc">International Sustainability Standards Board etablerar globala standarder. Rörelsen mot ett globalt finansiellt rapporteringssystem för hållbarhet tar form.</div>
+          </div>
+        </div>
+        <div class="event">
+          <span class="event-year era-obligatorisk-bg">2025</span>
+          <div class="event-body">
+            <div class="event-title">ELV-förordningen</div>
+            <div class="event-desc">EU kräver minst 15–25% återvunnen plast i nya bilar. Hållbarhet blir ett produktionskrav i en av världens största industrier.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /timeline -->
+
+  <div class="pullquote">
+    <p>"Hållbarhet slutade vara ett val när det finansiella systemet insåg att miljörisker är kreditrisker. Från det ögonblicket är det inte längre en fråga om moral – det är en fråga om prissättning."</p>
+  </div>
+
+  <div class="forces-section">
+    <h2 class="forces-title">Två logiker, en riktning</h2>
+    <div class="forces-grid">
+      <div class="force-card values">
+        <div class="force-card-title">Värderingsdriven hållbarhet</div>
+        <ul class="force-list">
+          <li>Frivillig rapportering utan standardiserade mått</li>
+          <li>Initieras av övertygade ledare</li>
+          <li>Kommunikativ funktion – visa att man bryr sig</li>
+          <li>Kan prioriteras ned när lönsamhet pressas</li>
+          <li><em>Patagonia, Body Shop, tidiga CSR-rapporter</em></li>
+        </ul>
+      </div>
+      <div class="force-card struct">
+        <div class="force-card-title">Strukturellt driven hållbarhet</div>
+        <ul class="force-list">
+          <li>Obligatorisk rapportering med standardiserade mått</li>
+          <li>Initieras av lagstiftning och kapitalmarknader</li>
+          <li>Redovisningsfunktion – bevisa vad man gör</li>
+          <li>Kan inte prioriteras ned – det är ett krav</li>
+          <li><em>CSRD, EU Taxonomy, CBAM, ELV-direktivet</em></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <p>© 2025 · Carl Rugfelt · <a href="https://carlrugfelt.github.io">carlrugfelt.github.io</a></p>
+</footer>
+
+</body>
+</html>
